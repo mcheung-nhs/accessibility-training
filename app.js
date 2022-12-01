@@ -23,7 +23,7 @@ const routes = require('./app/routes');
 const utils = require('./lib/utils.js')
 
 // Set configuration variables
-const port = process.env.PORT || config.port;
+const port = process.env.PORT || 5000
 
 // Initialise applications
 const app = express();
