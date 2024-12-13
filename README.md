@@ -1,7 +1,6 @@
 # Introduction
 
 This exercise is based on a fictional NHS service website which uses the [NHS design system](https://service-manual.nhs.uk/design-system). The design system is based on the research and experience of many NHS digital teams and adheres to accessibility guidelines.
-This exercise is based on a fictional NHS service website which uses the [NHS design system](https://service-manual.nhs.uk/design-system). The design system is based on the research and experience of many NHS digital teams and adheres to accessibility guidelines.
 
 However accessibility issues can be introduced if the design system is misused, misunderstood or not implemented correctly.
 
