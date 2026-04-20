@@ -1,4 +1,5 @@
 // Core dependencies
+const { spawn } = require('child_process');
 const gulp = require('gulp');
 
 // External dependencies
@@ -6,7 +7,6 @@ const babel = require('gulp-babel');
 const browserSync = require('browser-sync');
 const clean = require('gulp-clean');
 var sass = require('gulp-sass')(require('sass'));
-const nodemon = require('gulp-nodemon');
 
 // Local dependencies
 const config = require('./app/config');
@@ -56,28 +56,56 @@ function compileAssets() {
 
 // Start nodemon
 function startNodemon(done) {
-  const server = nodemon({
-    script: 'app.js',
-    stdout: false,
-    ext: 'scss js html',
-    quiet: true,
+  const server = spawn(process.execPath, [
+    './node_modules/nodemon/bin/nodemon.js',
+    '--watch', 'app.js',
+    '--watch', 'app',
+    '--watch', 'lib',
+    '--watch', 'middleware',
+    '--watch', 'app/views',
+    '--ext', 'scss,js,html',
+    '--quiet',
+    'app.js'
+  ], {
+    stdio: ['inherit', 'pipe', 'pipe']
   });
   let starting = false;
+  let ready = false;
 
   const onReady = () => {
+    if (ready) {
+      return;
+    }
+
+    ready = true;
     starting = false;
     done();
   };
 
-  server.on('start', () => {
-    starting = true;
-    setTimeout(onReady);
+  server.stdout.on('data', (chunk) => {
+    var output = chunk.toString();
+
+    process.stdout.write(output);
+    if (starting || output.indexOf('starting `') !== -1 || output.indexOf('restarting due to changes') !== -1) {
+      onReady();
+    }
   });
 
-  server.on('stdout', (stdout) => {
-    process.stdout.write(stdout);
-    if (starting) {
-      onReady();
+  server.stderr.on('data', (chunk) => {
+    process.stderr.write(chunk.toString());
+  });
+
+  server.on('spawn', () => {
+    starting = true;
+  });
+
+  server.on('error', (error) => {
+    done(error);
+  });
+
+  process.on('exit', () => {
+    if (!server.killed) {
+      server.kill('SIGTERM');
     }
   });
 }
