@@ -71,12 +71,14 @@ function startNodemon(done) {
   });
   let starting = false;
   let ready = false;
+  let readyTimer;
 
   const onReady = () => {
     if (ready) {
       return;
     }
 
+    clearTimeout(readyTimer);
     ready = true;
     starting = false;
     done();
@@ -97,9 +99,11 @@ function startNodemon(done) {
 
   server.on('spawn', () => {
     starting = true;
+    readyTimer = setTimeout(onReady, 1000);
   });
 
   server.on('error', (error) => {
+    clearTimeout(readyTimer);
     done(error);
   });
 
