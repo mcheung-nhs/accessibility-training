@@ -37,7 +37,6 @@
     "gulp-nodemon": "^2.5.0",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^5.1.0",
-    "keypather": "^3.0.0",
     "nhsuk-frontend": "^8.1.1",
     "nunjucks": "^3.2.4",
     "path": "^0.12.7",
@@ -49,5 +48,10 @@
     "eslint-plugin-import": "^2.27.5",
     "pa11y-ci": "^4.0.1",
     "pa11y-ci-reporter-html": "^8.0.1"
+  },
+  "overrides": {
+    "pa11y-ci": {
+      "lodash": "^4.18.1"
+    }
   }
 }
