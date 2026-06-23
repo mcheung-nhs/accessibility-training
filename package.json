@@ -20,8 +20,8 @@
   "author": "Michael Cheung",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "^7.21.4",
-    "@babel/preset-env": "^7.21.4",
+    "@babel/core": "^8.0.1",
+    "@babel/preset-env": "^8.0.2",
     "basic-auth": "^2.0.1",
     "body-parser": "^1.20.5",
     "browser-sync": "^3.0.3",
@@ -30,7 +30,7 @@
     "express": "^4.22.2",
     "express-session": "^1.18.2",
     "gulp": "^5.0.0",
-    "gulp-babel": "^8.0.0",
+    "gulp-babel": "^8.1.0",
     "gulp-clean": "^0.4.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-rename": "^1.4.0",
@@ -42,8 +42,8 @@
     "sass": "^1.62.0"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint": "^10.5.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
     "pa11y-ci": "^4.0.1",
     "pa11y-ci-reporter-html": "^8.0.1"
